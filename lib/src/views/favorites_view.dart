@@ -14,7 +14,7 @@ class FavoritesView extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              BlocProvider.of<FavoriteBloc>(context).add(const FavoriteGetEvent());
+              BlocProvider.of<FavoriteBloc>(context).add(const FavoriteUpdateEvent());
             },
             icon: const Icon(Icons.restart_alt),
           )
@@ -40,6 +40,24 @@ class FavoritesView extends StatelessWidget {
               itemBuilder: (BuildContext ctx, int index) =>
                   RepoListTile(repo: state.result[index]),
             );
+          }
+
+          if(state is FavoriteUpdateSuccessState) {
+            if (state.result.isEmpty) {
+              return Center(
+                child: Text("Empty",
+                  style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                      color: RColors.rSecondary
+                  ),
+                ),
+              );
+            } else {
+              return ListView.builder(
+                itemCount: state.result.length,
+                itemBuilder: (BuildContext ctx, int index) =>
+                    RepoListTile(repo: state.result[index]),
+              );
+            }
           }
 
           if (state is FavoriteEmptyState) {

@@ -29,3 +29,10 @@ class FavoriteGetEvent extends FavoriteEvent {
   @override
   List<Object?> get props => [];
 }
+
+class FavoriteUpdateEvent extends FavoriteEvent {
+  const FavoriteUpdateEvent();
+
+  @override
+  List<Object?> get props => [];
+}

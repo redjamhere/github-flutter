@@ -19,8 +19,6 @@ class ResultsView extends StatelessWidget {
           IconButton(
             onPressed: () {
               BlocProvider.of<FavoriteBloc>(context).add(const FavoriteGetEvent());
-              Navigator.push(context, MaterialPageRoute(
-                  builder: (ctx) => const FavoritesView()));
             },
             icon: const Icon(Icons.favorite_border),
           )

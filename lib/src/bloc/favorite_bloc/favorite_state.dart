@@ -39,3 +39,8 @@ class FavoriteSaveErrorState extends FavoriteState {
   final String error;
   const FavoriteSaveErrorState(this.error) : super();
 }
+
+class FavoriteUpdateSuccessState extends FavoriteState {
+  final List<RepositoryModel> result;
+  const FavoriteUpdateSuccessState(this.result) : super();
+}

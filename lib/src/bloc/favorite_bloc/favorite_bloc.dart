@@ -16,6 +16,7 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
     on<FavoriteGetEvent>(_onFavoriteGet);
     on<FavoriteSaveEvent>(_onFavoriteSave);
     on<FavoriteRemoveEvent>(_onFavoriteRemove);
+    on<FavoriteUpdateEvent>(_onFavoriteUpdate);
   }
 
   void _onFavoriteGet (
@@ -59,4 +60,16 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
     }
   }
 
+  _onFavoriteUpdate(
+      FavoriteUpdateEvent event,
+      Emitter<FavoriteState> emit,
+  ) async {
+    emit(const FavoriteLoadingState());
+    try {
+      final List<RepositoryModel> _result = await favoriteRepository.getFavoriteRepositories();
+      emit(FavoriteUpdateSuccessState(_result));
+    } catch (err) {
+      emit(FavoriteErrorState(err.toString()));
+    }
+  }
 }
